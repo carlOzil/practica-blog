@@ -30,6 +30,11 @@ app.use(express.urlencoded({ extended: false }))
 //parse application/json
 app.use(express.json())
 
+//RUTAS
+app.use('/api/v1/blog',require('./routers/backRouters'));
+
+app.use('/api/v1/auth', require('./routers/authRouters'));
+
 //SERVIDOR A LA ESCUCHA
 app.listen(port, () => {
     console.log(`Servidor BACK a la escucha del puerto ${port}`);
