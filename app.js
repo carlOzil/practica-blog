@@ -1,7 +1,12 @@
+//REQUERIMIENTO EXPRESS
 const express = require ('express');
+//REQUERIMIENTO BBDD
+const { dbConnect } = require('./helpers/connection');
+//REQUERIMIENTO CORS
 const cors = require ('cors');
+//REQUERIMIENTO COOKIE-PARSER
 const cookieParser = require('cookie-parser');
-
+//REQUERIMIENTO DOTENV
 require('dotenv').config();
 
 //SERVIDOR
@@ -9,6 +14,9 @@ const app = express();
 
 //PORT
 const port = process.env.PORT;
+
+//CONEXIÓN BBDD
+dbConnect();
 
 //CORS
 app.use(cors());
@@ -24,5 +32,5 @@ app.use(express.json())
 
 //SERVIDOR A LA ESCUCHA
 app.listen(port, () => {
-    console.log(`servidor front a la escucha del puerto ${port}`);
+    console.log(`Servidor BACK a la escucha del puerto ${port}`);
 });
