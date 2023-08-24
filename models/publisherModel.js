@@ -21,9 +21,6 @@ const publisherSchema = new Schema({
     date: {
         type: Date,
         default: Date.now
-    },
-    token: {
-        type: String
     }
 });
 
