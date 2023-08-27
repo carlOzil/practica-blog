@@ -1,6 +1,6 @@
 const Article = require('../models/blogModel');
 
-//RECOGER TODOS LOS BLOGS
+//RECOGER TODOS LOS ARTÍCULOS DEL BLOG
 const getArticles = async (req, res) => {
 
     try {
@@ -20,7 +20,7 @@ const getArticles = async (req, res) => {
     };
 };
 
-//RECOGER BLOG POR NOMBRE
+//RECOGER ARTICULO POR NOMBRE
 const findArticle = async (req, res) => {
     const title = await req.params.title;
 
@@ -49,7 +49,7 @@ const findArticle = async (req, res) => {
     };
 };
 
-//CREAR BLOG
+//CREAR ARTÍCULO
 const createArticle = async (req, res) => {
     const article = new Article(req.body);
 
@@ -80,7 +80,7 @@ const createArticle = async (req, res) => {
     };
 };
 
-//EDITAR BLOG
+//EDITAR ARTÍCULO
 const editArticle = async (req, res) => {
     const id = await req.params.id;
 
@@ -108,7 +108,7 @@ const editArticle = async (req, res) => {
     };
 };
 
-//BORRAR BLOG
+//BORRAR ARTÍCULO
 const deleteArticle = async (req, res) => {
     const id = await req.params.id;
 

@@ -1,8 +1,9 @@
 const express = require('express');
 const { check } = require('express-validator');
 const { getArticles, findArticle, createArticle, editArticle, deleteArticle } = require('../controllers/blogController');
-const router = express.Router();
 const { validateEx } = require('../middlewares/validation');
+
+const router = express.Router();
 
 //RECOGER BLOGS
 router.get('/', getArticles);

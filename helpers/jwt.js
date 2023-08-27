@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-//GENERACIÓN DEL TOKEN
+//GENERACIÓN DEL TOKEN Y ALMACENADO EN COOKIES
 const generateJWT = (uid, name) => {
 
     return new Promise((resolve, reject) => {
@@ -14,9 +14,13 @@ const generateJWT = (uid, name) => {
             (error, token) => {
                 if (error) {
                     console.log(error);
-                    reject('Fallo al generar token');
+                    reject('Falló generación de token');
                 };
                 resolve(token);
+                res.cookie('myToken', token, {
+                    httpOnly: true, 
+                    maxAge: 1800000
+                });
             });
     });
 };
