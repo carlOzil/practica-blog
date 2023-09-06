@@ -1,6 +1,6 @@
 const express = require('express');
 const { check } = require('express-validator');
-const { getArticles, findArticle, createArticle, editArticle, deleteArticle, loadImg } = require('../controllers/blogController');
+const { getArticles, findArticles, createArticle, editArticle, deleteArticle, articlesForWriters, loadImg } = require('../controllers/blogController');
 const { validateEx } = require('../middlewares/validation');
 const { multerUpload } = require('../helpers/multer');
 
@@ -9,8 +9,8 @@ const router = express.Router();
 //RECOGER BLOGS
 router.get('/', getArticles);
 
-//RECOGER BLOG POR NOMBRE
-router.get("/:title", findArticle);
+//BUSCAR BLOGS POR NOMBRE
+router.get("/:title", findArticles);
 
 //CREAR BLOG
 router.post("/",
@@ -30,6 +30,9 @@ router.put("/:id",
 
 //BORRAR BLOG
 router.delete("/:id", deleteArticle);
+
+//CARGAR ARTICULOS PARA CADA ESCRITOR
+router.get("/:writer", findArticles);
 
 //CARGAR IMGS
 router.post("/loadimg", multerUpload.single('file'), loadImg)

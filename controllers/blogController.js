@@ -20,18 +20,18 @@ const getArticles = async (req, res) => {
     };
 };
 
-//RECOGER ARTICULO POR NOMBRE
-const findArticle = async (req, res) => {
+//RECOGER ARTICULOS POR NOMBRE
+const findArticles = async (req, res) => {
     const title = await req.params.title;
 
     try {
-        const exist = await Article.findOne({ title: title });
+        const exist = await Article.find({ title: title });
 
         if (exist) {
             return res.status(200).json({
                 ok: true,
                 data: exist,
-                msg: 'Artículo encontrado'
+                msg: 'Artículos encontrados:'
             });
 
         } else {
@@ -136,6 +136,34 @@ const deleteArticle = async (req, res) => {
     };
 };
 
+//MOSTRAR ARTICULOS PARA CADA ESCRITOR
+const articlesForWriters = async (req, res) => {
+    const writer = await req.params.writer;
+
+    try {
+        const exist = await Article.find({ writer: writer });
+
+        if (exist) {
+            return res.status(200).json({
+                ok: true,
+                data: exist,
+                msg: "Estos son tus artículos:"
+            })
+        } else {
+            return res.status(400).json({
+                msg: "Aún no has escrito artículos"
+            })
+        }
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            ok: false,
+            msg: "Contacta con el administrador"
+        })
+    }
+
+}
+
 //CARGAR IMAGENES MULTER
 const loadImg = (req, res) => {
     console.log(req.file)
@@ -145,9 +173,10 @@ const loadImg = (req, res) => {
 
 module.exports = {
     getArticles,
-    findArticle,
+    findArticles,
     createArticle,
     editArticle,
     deleteArticle,
+    articlesForWriters,
     loadImg
 };
