@@ -73,6 +73,7 @@ const loginUser = async (req, res) => {
             uid: user.id,
             name: user.name,
             email: user.email,
+            role: user.role,
             token
         });
 
@@ -84,12 +85,16 @@ const loginUser = async (req, res) => {
     };
 };
 
-//RENOVAR TOKEN
-const renewToken = async (req, res) => {
+//RENOVAR Y ALMACENAR TOKEN
+const renewAndStoreToken = async (req, res) => {
     const { uid, name } = req
 
     const token = await generateJWT(uid, name);
 
+    res.cookie('storedToken', token, {
+        httpOnly: true,
+        maxAge: 1800000
+    });
     res.status(200).json({
         ok: true,
         msg: "Token renovado",
@@ -104,5 +109,5 @@ const renewToken = async (req, res) => {
 module.exports = {
     createUser,
     loginUser,
-    renewToken
+    renewAndStoreToken
 }

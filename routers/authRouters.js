@@ -1,6 +1,6 @@
 const express = require("express");
 const { check } = require('express-validator');
-const { createUser, loginUser, renewToken } = require('../controllers/authController');
+const { createUser, loginUser, renewAndStoreToken } = require('../controllers/authController');
 const { validateEx } = require('../middlewares/validation');
 const { validateJWT } = require('../middlewares/validationJWT');
 
@@ -21,10 +21,10 @@ router.post('/login',
         check('email', 'Email obligatorio').isEmail(),
         check('password', 'Password obligatorio').not().isEmpty(),
         validateEx
-    ], loginUser);
+    ], loginUser, validateJWT);
 
 //RENOVAR TOKEN
-router.get('/renew', renewToken);
+router.get('/renew', validateJWT, renewAndStoreToken);
 
 
 module.exports = router

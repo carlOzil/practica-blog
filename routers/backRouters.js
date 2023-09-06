@@ -1,7 +1,8 @@
 const express = require('express');
 const { check } = require('express-validator');
-const { getArticles, findArticle, createArticle, editArticle, deleteArticle } = require('../controllers/blogController');
+const { getArticles, findArticle, createArticle, editArticle, deleteArticle, loadImg } = require('../controllers/blogController');
 const { validateEx } = require('../middlewares/validation');
+const { multerUpload } = require('../helpers/multer');
 
 const router = express.Router();
 
@@ -30,5 +31,7 @@ router.put("/:id",
 //BORRAR BLOG
 router.delete("/:id", deleteArticle);
 
+//CARGAR IMGS
+router.post("/loadimg", multerUpload.single('file'), loadImg)
 
 module.exports = router

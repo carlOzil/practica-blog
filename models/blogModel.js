@@ -12,12 +12,17 @@ const blogSchema = new Schema({
     pic: {
         src: {
             type: String
-        },
-        alt: {
-            type: String
-        }
+        } 
+    },
+    description: {
+        type: String,
+        required: true
     },
     text: {
+        type: String,
+        required: true
+    },
+    writer: {
         type: String,
         required: true
     }

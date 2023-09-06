@@ -136,11 +136,18 @@ const deleteArticle = async (req, res) => {
     };
 };
 
+//CARGAR IMAGENES MULTER
+const loadImg = (req, res) => {
+    console.log(req.file)
+    res.send('Imagen cargada!')
+};
+
 
 module.exports = {
     getArticles,
     findArticle,
     createArticle,
     editArticle,
-    deleteArticle
+    deleteArticle,
+    loadImg
 };

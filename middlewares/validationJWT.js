@@ -17,10 +17,6 @@ const validateJWT = (req, res, next) => {
         const payload = jwt.verify(tok, process.env.JWT_SECRET);
         req.uid = payload.uid;
         req.nombre = payload.nombre;
-        res.cookie(tok, 'myToken', {
-            httpOnly: true,
-            maxAge: 1800000
-        });
     } catch (error) {
         return res.status(401).json({
             ok: false,
