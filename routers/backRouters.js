@@ -1,6 +1,6 @@
 const express = require('express');
 const { check } = require('express-validator');
-const { getArticles, findArticles, createArticle, editArticle, deleteArticle, articlesForWriters, loadImg } = require('../controllers/blogController');
+const { getArticles, findArticles, createArticle, editArticle, deleteArticle, articlesForWriters, loadImg, articleId } = require('../controllers/blogController');
 const { validateEx } = require('../middlewares/validation');
 const { multerUpload } = require('../helpers/multer');
 
@@ -36,5 +36,9 @@ router.get("/:writer", findArticles);
 
 //CARGAR IMGS
 router.post("/loadimg", multerUpload.single('file'), loadImg)
+
+//AMPLIAR ARTICULO
+router.get("/:id", articleId);
+
 
 module.exports = router

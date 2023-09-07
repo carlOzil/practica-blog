@@ -16,16 +16,16 @@ const blogSchema = new Schema({
     },
     description: {
         type: String,
-        required: true
+        // required: true
     },
     text: {
         type: String,
-        required: true
+        // required: true
     },
-    writer: {
-        type: String,
-        required: true
-    }
+    // writer: {
+    //     type: String,
+    //     required: true
+    // }
 });
 
 module.exports = model("Blog", blogSchema)

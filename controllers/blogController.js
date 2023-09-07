@@ -39,7 +39,6 @@ const findArticles = async (req, res) => {
                 msg: 'No hay artículos con ese título'
             });
         };
-
     } catch (error) {
         console.log(error);
         return res.status(500).json({
@@ -55,7 +54,7 @@ const createArticle = async (req, res) => {
 
     try {
         const { title } = article;
-        const exist = await Article.findOne({ title: title })
+        const exist = await Article.findOne({ title: title });
 
         if (exist) {
             return res.status(400).json({
@@ -72,7 +71,7 @@ const createArticle = async (req, res) => {
         });
 
     } catch (error) {
-        console.log(error)
+        console.log(error);
         return res.status(500).json({
             ok: false,
             msg: "Contacta con el administrador"
@@ -148,26 +147,53 @@ const articlesForWriters = async (req, res) => {
                 ok: true,
                 data: exist,
                 msg: "Estos son tus artículos:"
-            })
+            });
         } else {
             return res.status(400).json({
                 msg: "Aún no has escrito artículos"
-            })
-        }
+            });
+        };
     } catch (error) {
         console.log(error);
         return res.status(500).json({
             ok: false,
             msg: "Contacta con el administrador"
-        })
-    }
-
-}
+        });
+    };
+};
 
 //CARGAR IMAGENES MULTER
 const loadImg = (req, res) => {
-    console.log(req.file)
-    res.send('Imagen cargada!')
+    console.log(req.file);
+    res.send('Imagen cargada!');
+};
+
+//RECOGER ARTICULO POR SU ID
+const articleId = async (req, res) => {
+    const id = await req.params.id;
+
+    try {
+        const exist = await Article.find({ id: id });
+
+        if (exist) {
+            return res.status(200).json({
+                ok: true,
+                data: exist,
+                msg: 'Léelo completo'
+            });
+
+        } else {
+            return res.status(400).json({
+                msg: 'No tiene más info'
+            });
+        };
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            ok: false,
+            msg: 'Contacta con el administrador'
+        });
+    };
 };
 
 
@@ -178,5 +204,6 @@ module.exports = {
     editArticle,
     deleteArticle,
     articlesForWriters,
-    loadImg
+    loadImg,
+    articleId
 };
